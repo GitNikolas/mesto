@@ -1,0 +1,11 @@
+.profile__edit-button{
+  grid-area: profile__edit-button;
+  align-self: center;
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../../images/pencil.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  box-sizing: border-box;
+}
