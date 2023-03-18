@@ -2,8 +2,11 @@
   grid-area: element__title-text;
   color: #000000;
   margin: 0 auto 0 21px;
-  max-width: 190px;
+  max-width: 195px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
 }
