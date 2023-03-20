@@ -1,0 +1,9 @@
+.elements__item{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+  'element__image'
+  'element__title';
+  border-radius: 10px;
+  overflow: hidden;
+}

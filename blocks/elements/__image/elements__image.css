@@ -1,6 +1,6 @@
-.element__image{
+.elements__image{
   grid-area: element__image;
   object-fit: cover;
-  width: 100%;
+  width: 282px;
   aspect-ratio: 1 / 1;
 }

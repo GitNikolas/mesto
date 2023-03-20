@@ -5,7 +5,14 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width:425px) {
+@media screen and (max-width:900px) {
+  .profile{
+    margin: 0 5% 0;
+  }
+}
+
+
+@media screen and (max-width:630px) {
   .profile{
     grid-template-columns: 1fr;
     justify-items: center;

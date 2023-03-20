@@ -6,6 +6,12 @@
   margin: 0;
 }
 
+@media screen and (max-width:730px) {
+  .profile__status{
+    justify-self: center;
+  }
+}
+
 @media screen and (max-width:425px) {
   .profile__status{
     justify-self: center;
