@@ -20,69 +20,71 @@
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__status">Исследователь океана</p>
-        <div class="profile__edit-button profile__edit-button-link"></div>
+        <button aria-label="Редактировать профиль" type="button" class="profile__edit-button profile__edit-button-link"></button>
       </div>
-      <div class="profile__add-button"></div>
+      <button aria-label="Добавить фотокарточку" type="button" class="profile__add-button"></button>
     </section>
-    <ul class="elements list-style">
-      <li class="elements__item">
-        <img class="elements__image" src="./images/elements/elbrus.jpg" alt="Эльбрус">
-        <div class="elements__title">
-            <h2 class="elements__title-text">Эльбрус</h2>
-            <div class="elements__like"></div>
-        </div>
-      </li>
-      <li class="elements__item">
-        <img class="elements__image" src="./images/elements/kamchatka.jpg" alt="Камчатка">
-        <div class="elements__title">
-          <h2 class="elements__title-text">Камчатка</h2>
-          <div class="elements__like"></div>
-        </div>
-      </li>
-      <li class="elements__item">
-        <img class="elements__image" src="./images/elements/kilimanjaro.jpg" alt="Килиманджаро">
-        <div class="elements__title">
-          <h2 class="elements__title-text">Килиманджаро</h2>
-          <div class="elements__like"></div>
-        </div>
-      </li>
-      <li class="elements__item">
-        <img class="elements__image" src="./images/elements/lofoten-islands.jpg" alt="Лофотены">
-        <div class="elements__title">
-          <h2 class="elements__title-text">Лофотены</h2>
-          <div class="elements__like"></div>
-        </div>
-      </li>
-      <li class="elements__item">
-        <img class="elements__image" src="./images/elements/manarola.jpg" alt="Манарола">
-        <div class="elements__title">
-          <h2 class="elements__title-text">Манарола</h2>
-          <div class="elements__like"></div>
-        </div>
-      </li>
-      <li class="elements__item">
-        <img class="elements__image" src="./images/elements/karachaevo-cherkesia.png" alt="Карачаево-Черкесия">
-        <div class="elements__title">
-          <h2 class="elements__title-text">Карачаево-Черкесия</h2>
-          <div class="elements__like"></div>
-        </div>
-      </li>
-    </ul>
+    <section class="elements">
+      <ul class="elements__list list-style">
+        <li class="photo-card">
+          <img class="photo-card__image" src="./images/elements/elbrus.jpg" alt="Эльбрус">
+          <div class="photo-card__title">
+              <h2 class="photo-card__text">Эльбрус</h2>
+              <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+        <li class="photo-card">
+          <img class="photo-card__image" src="./images/elements/kamchatka.jpg" alt="Камчатка">
+          <div class="photo-card__title">
+            <h2 class="photo-card__text">Камчатка</h2>
+            <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+        <li class="photo-card">
+          <img class="photo-card__image" src="./images/elements/kilimanjaro.jpg" alt="Килиманджаро">
+          <div class="photo-card__title">
+            <h2 class="photo-card__text">Килиманджаро</h2>
+            <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+        <li class="photo-card">
+          <img class="photo-card__image" src="./images/elements/lofoten-islands.jpg" alt="Лофотены">
+          <div class="photo-card__title">
+            <h2 class="photo-card__text">Лофотены</h2>
+            <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+        <li class="photo-card">
+          <img class="photo-card__image" src="./images/elements/manarola.jpg" alt="Манарола">
+          <div class="photo-card__title">
+            <h2 class="photo-card__text">Манарола</h2>
+            <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+        <li class="photo-card">
+          <img class="photo-card__image" src="./images/elements/karachaevo-cherkesia.png" alt="Карачаево-Черкесия">
+          <div class="photo-card__title">
+            <h2 class="photo-card__text">Карачаево-Черкесия</h2>
+            <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </main>
 <footer class="footer">
   <p class="footer__copyright">© 2023 Mesto Russia</p>
 </footer>
-<section class="popup popup_type_profile-edit">
+<div class="popup popup_type_profile-edit">
   <div class="popup__content">
-    <div role="button" class="popup__close"></div>
-    <h2 class="popup__title"> Редактировать профиль</h2>
-    <form class="popup__form">
-      <input class="popup__input popup__input_type_user-name">
-      <input class="popup__input popup__input_type_user-status">
-      <button type="submit" class="popup__button popup__button_type_submit">Сохранить</button>
+    <button type="button" class="popup__close"></button>
+    <h2 class="popup__title">Редактировать профиль</h2>
+    <form class="popup__form" name="popupForm" >
+      <input class="popup__input popup__input_type_user-name" type="text" name="userName" required placeholder="Как вас зовут?">
+      <input class="popup__input popup__input_type_user-status" type="text" name="userStatus" required placeholder="Чем вы занимаетесь?">
+      <button type="submit" class="popup__submit-button">Сохранить</button>
     </form>
   </div>
-</section>
-<script src="./index.js"></script>
+</div>
+<script src="./scripts/index.js"></script>
 </body>
 </html>

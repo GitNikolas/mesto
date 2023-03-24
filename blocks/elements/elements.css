@@ -1,12 +1,7 @@
 .elements{
-  display: grid;
-  justify-content:center;
-  grid-template-columns:repeat(auto-fit, 282px);
-  column-gap:17px;
-  row-gap:20px;
+  display: block;
   max-width: 880px;
   margin: 51px auto 67px;
-  box-sizing: border-box;
 }
 
 @media screen and (max-width:425px) {

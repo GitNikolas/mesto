@@ -1,4 +1,4 @@
-.elements__item{
+.photo-card{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:

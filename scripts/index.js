@@ -8,36 +8,23 @@ const profileEditPopupForm=profileEditPopup.querySelector('.popup__form');
 const userName=document.querySelector('.profile__name');
 const userStatus=document.querySelector('.profile__status');
 
-
-function editLinkClick(){
+function openPopup(){
   profileEditPopup.classList.add('popup_open');
   popupUserName.value=userName.textContent;
   popupUserStatus.value=userStatus.textContent;
 };
 
-function editLinkClickRemove(){
+function closePopup(){
   profileEditPopup.classList.remove('popup_open')
 };
 
 
-function profileEditPopupFormSubmit(event){
+function profileFormSubmit(event){
   event.preventDefault();
-  const name = popupUserName.value;
-  const status= popupUserStatus.value;
-  userName.textContent = name;
-  userStatus.textContent = status;
+  userName.textContent = popupUserName.value;
+  userStatus.textContent = popupUserStatus.value;
 };
 
-
-
-editLink.addEventListener('click', editLinkClick)
-profileEditPopupCloseButton.addEventListener('click', editLinkClickRemove)
-profileEditPopupForm.addEventListener('submit', profileEditPopupFormSubmit)
-
-
-
-console.log(editLink);
-console.log(profileEditPopup);
-console.log(profileEditPopupCloseButton);
-
-
+editLink.addEventListener('click', openPopup);
+profileEditPopupCloseButton.addEventListener('click', closePopup);
+profileEditPopupForm.addEventListener('submit', profileFormSubmit);

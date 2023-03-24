@@ -5,6 +5,10 @@
   font-size: 18px;
   line-height: 1.22;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 335px;
 }
 
 @media screen and (max-width:730px) {
@@ -15,7 +19,6 @@
 
 @media screen and (max-width:425px) {
   .profile__status{
-    justify-self: center;
     font-size: 14px;
     line-height: 1.21;
   }

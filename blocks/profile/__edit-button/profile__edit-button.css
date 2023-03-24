@@ -4,7 +4,8 @@
   border: 1px solid #FFFFFF;
   width: 24px;
   height: 24px;
-  background-image: url(../../../../images/pencil.svg);
+  background-color: rgba(0,0,0,0);
+  background-image: url(../../../images/pencil.svg);
   background-repeat: no-repeat;
   background-position: center;
   box-sizing: border-box;
