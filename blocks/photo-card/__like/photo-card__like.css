@@ -1,5 +1,7 @@
-.elements__like{
+.photo-card__like{
   grid-area: element__like;
+  border: none;
+  background-color: rgba(0,0,0,0);;
   background-image: url(../../../images/like.svg);
   width: 22px;
   height: 19px;
@@ -8,6 +10,6 @@
 }
 
 
-.elements__like:hover{
+.photo-card__like:hover{
   opacity:0.5;
 }

@@ -1,7 +1,6 @@
-.elements__title{
+.photo-card__title{
   grid-area: element__title;
   background-color: #FFFFFF;
-  min-height: 79px;
   display: grid;
   grid-template-areas:
   'element__title-text element__like';
