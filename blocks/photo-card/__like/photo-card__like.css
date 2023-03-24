@@ -1,14 +1,13 @@
 .photo-card__like{
   grid-area: element__like;
   border: none;
-  background-color: rgba(0,0,0,0);;
+  background-color: rgba(0,0,0,0);
   background-image: url(../../../images/like.svg);
   width: 22px;
   height: 19px;
   margin: 0 20px 0 auto;
   cursor: pointer;
 }
-
 
 .photo-card__like:hover{
   opacity:0.5;
