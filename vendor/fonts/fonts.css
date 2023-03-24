@@ -11,7 +11,6 @@
   font-family: "Inter";
   src: url("./Inter Web/Inter-Medium.woff2") format("woff2"),
        url("./Inter Web/Inter-Medium.woff") format("woff");
-  font-style: medium;
   font-weight: 500;
   font-display: swap;
 }
@@ -20,7 +19,6 @@
   font-family: "Inter";
   src: url("./Inter Web/Inter-Black.woff2") format("woff2"),
        url("./Inter Web/Inter-Black.woff") format("woff");
-  font-style: black;
   font-weight: 900;
   font-display: swap;
 }
