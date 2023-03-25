@@ -1,4 +1,4 @@
-const editLink=document.querySelector('.profile__edit-button-link');
+const editLink=document.querySelector('.profile__edit-button');
 const profileEditPopup=document.querySelector('.popup_type_profile-edit');
 const profileEditPopupCloseButton=profileEditPopup.querySelector('.popup__close');
 const popupUserName=profileEditPopup.querySelector('.popup__input_type_user-name');
@@ -23,6 +23,7 @@ function profileFormSubmit(event){
   event.preventDefault();
   userName.textContent = popupUserName.value;
   userStatus.textContent = popupUserStatus.value;
+  profileEditPopup.classList.remove('popup_open');
 };
 
 editLink.addEventListener('click', openPopup);
