@@ -23,7 +23,7 @@ function profileFormSubmit(event){
   event.preventDefault();
   userName.textContent = popupUserName.value;
   userStatus.textContent = popupUserStatus.value;
-  profileEditPopup.classList.remove('popup_open');
+  closePopup()
 };
 
 editLink.addEventListener('click', openPopup);
