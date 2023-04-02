@@ -9,10 +9,15 @@
   color: white;
   padding: 0;
   border: none;
+  cursor: pointer;
 }
 
 .popup__submit-button:hover{
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.popup__submit-button:disabled{
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 @media screen and (max-width:425px) {
