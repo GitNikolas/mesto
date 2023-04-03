@@ -8,18 +8,9 @@ const placeUrlInput = addPhotoPopupForm.querySelector('.popup__input_type_pictur
 const placeTitle = document.querySelector('.photo-card__text');
 const placeImage = document.querySelector('.photo-card__image')
 
-
-
-
 closePhotoPopup = () => {
   addPhotoPopup.classList.remove('popup_open');
 };
-
-// disabledSubmitPhotoPopupButton = () => {
-//   if(placeNameInput.value.length === 0 || placeUrlInput.value.length === 0){
-//     submitPhotoPopupButton.setAttribute('disabled', true);
-//   }
-// }
 
 submitPhotoPopup = (event) => {
   event.preventDefault();
@@ -32,6 +23,7 @@ submitPhotoPopup = (event) => {
   };
 
   renderPhotoElement(createPhotoCard(photoData));
+  closePhotoPopup();
 };
 
 

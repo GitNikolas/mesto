@@ -3,4 +3,5 @@
   object-fit: cover;
   width: 282px;
   aspect-ratio: 1 / 1;
+  cursor:pointer;
 }

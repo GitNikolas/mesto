@@ -3,10 +3,12 @@ const profileEditPopup=document.querySelector('.popup_type_profile-edit');
 const profileEditPopupCloseButton=profileEditPopup.querySelector('.popup__close');
 const popupUserName=profileEditPopup.querySelector('.popup__input_type_user-name');
 const popupUserStatus=profileEditPopup.querySelector('.popup__input_type_user-status');
-const popupSaveButton=profileEditPopup.querySelector('.popup__button_type_submit');
+const popupSaveButton=profileEditPopup.querySelector('.popup__submit-button');
 const profileEditPopupForm=profileEditPopup.querySelector('.popup__form');
 const userName=document.querySelector('.profile__name');
 const userStatus=document.querySelector('.profile__status');
+const placeName = document.querySelector('.popup__input_type_place-name');
+const link = document.querySelector('.popup__input_type_picture-url')
 
 const openPopup = (popup) => {
   popup.classList.add('popup_open');
@@ -33,8 +35,9 @@ profileEditPopupCloseButton.addEventListener('click', () => {
 
 profileEditPopupForm.addEventListener('submit', profileFormSubmit);
 
-const photoCardTemplate = document.getElementById('photo-card-template')
-const photoGrid = document.querySelector('.elements__list')
+const photoCardTemplate = document.getElementById('photo-card-template');
+const photoGrid = document.querySelector('.elements__list');
+
 
 const createPhotoCard = (photoData) => {
   const photoElement = photoCardTemplate.content.querySelector('.photo-card').cloneNode(true);
@@ -42,6 +45,7 @@ const createPhotoCard = (photoData) => {
   const photoImage= photoElement.querySelector('.photo-card__image');
   const likeButton = photoElement.querySelector('.photo-card__like');
   const deleteButton = photoElement.querySelector('.photo-card__delete');
+
 
   const handleDelete = () => {
     photoElement.remove();
@@ -51,9 +55,10 @@ const createPhotoCard = (photoData) => {
     likeButton.classList.toggle('photo-card__like_active')
   };
 
-  deleteButton.addEventListener('click', (handleDelete));
 
-  likeButton.addEventListener('click', (handleLike));
+  deleteButton.addEventListener('click', handleDelete);
+
+  likeButton.addEventListener('click', handleLike);
 
   photoName.textContent = photoData.name;
   photoImage.src = photoData.link;
@@ -69,3 +74,34 @@ const renderPhotoElement = (photoElement) => {
 initialCards.forEach((initialCards) => {
   renderPhotoElement(createPhotoCard(initialCards));
 });
+
+
+const photoViewPopup = document.querySelector('.popup_type_view-photo');
+const photoViewPopupCloseButton = photoViewPopup.querySelector('.popup__close');
+const openImageButton = document.querySelectorAll('.photo-card__image');
+
+openImageButton.forEach(item => {
+  item.addEventListener('click', () =>{
+    openPopup(photoViewPopup);
+
+    const openedPhoto=photoViewPopup.querySelector('.photo__image')
+    const subtitlePhoto = photoViewPopup.querySelector('.photo__caption');
+
+    openedPhoto.src=item.src;
+    subtitlePhoto.innerHTML=item.alt;
+
+  });
+});
+
+photoViewPopupCloseButton.addEventListener('click', () =>{
+  closePopup(photoViewPopup);
+});
+
+
+
+
+
+
+
+
+
