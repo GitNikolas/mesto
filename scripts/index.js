@@ -18,12 +18,17 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_open');
 };
 
-const disabledButton = () => {
-  if (placeNameInput.value.length === 0 || placeUrlInput.value.length === 0){
-    submitPhotoPopupButton.setAttribute('disabled', true);
-  } else {
-    submitPhotoPopupButton.removeAttribute('disabled');
-  }
+const disabledButton = (popupForm) => {
+  const input = popupForm.querySelectorAll('.popup__input');
+  const submitButton = popupForm.querySelector('.popup__submit-button');
+
+  input.forEach((item) =>{
+    if(item.value.length === 0){
+      submitButton.setAttribute('disabled', true);
+    } else {
+      submitButton.removeAttribute('disabled');
+    }
+  })
 };
 
 function profileFormSubmit(event){
@@ -36,8 +41,13 @@ function profileFormSubmit(event){
 editLink.addEventListener('click', () => {
   openPopup(profileEditPopup);
   popupUserName.value = userName.textContent ;
-  popupUserStatus.value = userStatus.textContent
+  popupUserStatus.value = userStatus.textContent;
+  disabledButton(profileEditPopup);
 });
+
+profileEditPopup.addEventListener('input', () =>{
+  disabledButton(profileEditPopup);
+})
 
 profileEditPopupCloseButton.addEventListener('click', () => {
   closePopup(profileEditPopup);
@@ -69,8 +79,8 @@ const createPhotoCard = (photoData) => {
 
   photoImage.addEventListener('click', () => {
     openPopup(photoViewPopup);
-    const openedPhoto=photoViewPopup.querySelector('.photo__image')
-    const subtitlePhoto = photoViewPopup.querySelector('.photo__caption');
+    const openedPhoto=photoViewPopup.querySelector('.popup__image')
+    const subtitlePhoto = photoViewPopup.querySelector('.popup__caption');
     openedPhoto.src=photoImage.src;
     subtitlePhoto.innerHTML=photoImage.alt;
   });
@@ -110,9 +120,6 @@ const placeUrlInput = addPhotoPopupForm.querySelector('.popup__input_type_pictur
 const placeTitle = document.querySelector('.photo-card__text');
 const placeImage = document.querySelector('.photo-card__image');
 
-placeNameInput.addEventListener('input' , disabledButton);
-placeUrlInput.addEventListener('input' , disabledButton);
-
 submitPhotoPopup = (event) => {
   event.preventDefault();
 
@@ -128,7 +135,7 @@ submitPhotoPopup = (event) => {
 };
 
 addButton.addEventListener('click', () => {
-  disabledButton();
+  disabledButton(addPhotoPopup);
   openPopup(addPhotoPopup);
 })
 
@@ -137,3 +144,7 @@ closeButton.addEventListener('click', ()=>{
 })
 
 addPhotoPopupForm.addEventListener('submit', submitPhotoPopup);
+
+addPhotoPopup.addEventListener('input', () => {
+  disabledButton(addPhotoPopup)
+});
