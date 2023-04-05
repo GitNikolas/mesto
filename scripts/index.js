@@ -18,6 +18,14 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_open');
 };
 
+const disabledButton = () => {
+  if (placeNameInput.value.length === 0 || placeUrlInput.value.length === 0){
+    submitPhotoPopupButton.setAttribute('disabled', true);
+  } else {
+    submitPhotoPopupButton.removeAttribute('disabled');
+  }
+};
+
 function profileFormSubmit(event){
   event.preventDefault();
   userName.textContent = popupUserName.value;
@@ -27,6 +35,8 @@ function profileFormSubmit(event){
 
 editLink.addEventListener('click', () => {
   openPopup(profileEditPopup);
+  popupUserName.value = userName.textContent ;
+  popupUserStatus.value = userStatus.textContent
 });
 
 profileEditPopupCloseButton.addEventListener('click', () => {
@@ -35,17 +45,19 @@ profileEditPopupCloseButton.addEventListener('click', () => {
 
 profileEditPopupForm.addEventListener('submit', profileFormSubmit);
 
+// реализация создания новой карточки
+
 const photoCardTemplate = document.getElementById('photo-card-template');
 const photoGrid = document.querySelector('.elements__list');
 
-
 const createPhotoCard = (photoData) => {
   const photoElement = photoCardTemplate.content.querySelector('.photo-card').cloneNode(true);
+  const photoViewPopup = document.querySelector('.popup_type_view-photo');
   const photoName = photoElement.querySelector('.photo-card__text');
   const photoImage= photoElement.querySelector('.photo-card__image');
   const likeButton = photoElement.querySelector('.photo-card__like');
   const deleteButton = photoElement.querySelector('.photo-card__delete');
-
+  const photoViewPopupCloseButton = photoViewPopup.querySelector('.popup__close');
 
   const handleDelete = () => {
     photoElement.remove();
@@ -55,6 +67,17 @@ const createPhotoCard = (photoData) => {
     likeButton.classList.toggle('photo-card__like_active')
   };
 
+  photoImage.addEventListener('click', () => {
+    openPopup(photoViewPopup);
+    const openedPhoto=photoViewPopup.querySelector('.photo__image')
+    const subtitlePhoto = photoViewPopup.querySelector('.photo__caption');
+    openedPhoto.src=photoImage.src;
+    subtitlePhoto.innerHTML=photoImage.alt;
+  });
+
+  photoViewPopupCloseButton.addEventListener('click', () =>{
+    closePopup(photoViewPopup);
+  });
 
   deleteButton.addEventListener('click', handleDelete);
 
@@ -75,33 +98,42 @@ initialCards.forEach((initialCards) => {
   renderPhotoElement(createPhotoCard(initialCards));
 });
 
+// реализация попапа добавления новой карточки
 
-const photoViewPopup = document.querySelector('.popup_type_view-photo');
-const photoViewPopupCloseButton = photoViewPopup.querySelector('.popup__close');
-const openImageButton = document.querySelectorAll('.photo-card__image');
+const addPhotoPopup = document.querySelector('.popup_type_add-photo');
+const addButton = document.querySelector('.profile__add-button');
+const closeButton = addPhotoPopup.querySelector('.popup__close');
+const submitPhotoPopupButton = addPhotoPopup.querySelector('.popup__submit-button');
+const addPhotoPopupForm = addPhotoPopup.querySelector('.popup__form');
+const placeNameInput = addPhotoPopupForm.querySelector('.popup__input_type_place-name');
+const placeUrlInput = addPhotoPopupForm.querySelector('.popup__input_type_picture-url');
+const placeTitle = document.querySelector('.photo-card__text');
+const placeImage = document.querySelector('.photo-card__image');
 
-openImageButton.forEach(item => {
-  item.addEventListener('click', () =>{
-    openPopup(photoViewPopup);
+placeNameInput.addEventListener('input' , disabledButton);
+placeUrlInput.addEventListener('input' , disabledButton);
 
-    const openedPhoto=photoViewPopup.querySelector('.photo__image')
-    const subtitlePhoto = photoViewPopup.querySelector('.photo__caption');
+submitPhotoPopup = (event) => {
+  event.preventDefault();
 
-    openedPhoto.src=item.src;
-    subtitlePhoto.innerHTML=item.alt;
+  const name = placeNameInput.value;
+  const link = placeUrlInput.value;
+  const photoData = {
+    name,
+    link,
+  };
 
-  });
-});
+  renderPhotoElement(createPhotoCard(photoData));
+  closePopup(addPhotoPopup);
+};
 
-photoViewPopupCloseButton.addEventListener('click', () =>{
-  closePopup(photoViewPopup);
-});
+addButton.addEventListener('click', () => {
+  disabledButton();
+  openPopup(addPhotoPopup);
+})
 
+closeButton.addEventListener('click', ()=>{
+  closePopup(addPhotoPopup);
+})
 
-
-
-
-
-
-
-
+addPhotoPopupForm.addEventListener('submit', submitPhotoPopup);
