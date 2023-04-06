@@ -3,6 +3,7 @@
 @import url(../blocks/list-style/list-style.css);
 
 @import url(../blocks/page/page.css);
+@import url(../blocks/flex-container/flex-container.css);
 @import url(../blocks/content/content.css);
 
 @import url(../blocks/header/header.css);
