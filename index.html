@@ -10,73 +10,74 @@
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
   <script src="./scripts/initialCards.js" defer></script>
-  <script src="./scripts/addPhotoPopup.js" defer></script>
   <script src="./scripts/index.js" defer></script>
 </head>
 <body class="page">
-  <header class="header">
-    <a class="header__logo" href="#"></a>
-  </header>
-  <main class="content">
-    <section class="profile">
-      <div class="profile__avatar"></div>
-      <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__status">Исследователь океана</p>
-        <button aria-label="Редактировать профиль" type="button" class="profile__edit-button"></button>
+  <div class="flex-container">
+    <header class="header">
+      <a class="header__logo" href="#"></a>
+    </header>
+    <main class="content">
+      <section class="profile">
+        <div class="profile__avatar"></div>
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <p class="profile__status">Исследователь океана</p>
+          <button aria-label="Редактировать профиль" type="button" class="profile__edit-button"></button>
+        </div>
+        <button aria-label="Добавить фотокарточку" type="button" class="profile__add-button"></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__list list-style">
+        </ul>
+      </section>
+    </main>
+  </div>
+    <footer class="footer">
+      <p class="footer__copyright">© 2023 Mesto Russia</p>
+    </footer>
+
+    <div class="popup popup_type_profile-edit">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="popupForm" >
+          <input class="popup__input popup__input_type_user-name" type="text" name="userName" required placeholder="Как вас зовут?">
+          <input class="popup__input popup__input_type_user-status" type="text" name="userStatus" required placeholder="Чем вы занимаетесь?">
+          <button type="submit" class="popup__submit-button">Сохранить</button>
+        </form>
       </div>
-      <button aria-label="Добавить фотокарточку" type="button" class="profile__add-button"></button>
-    </section>
-    <section class="elements">
-      <ul class="elements__list list-style">
-      </ul>
-    </section>
-  </main>
-<footer class="footer">
-  <p class="footer__copyright">© 2023 Mesto Russia</p>
-</footer>
+    </div>
 
-<div class="popup popup_type_profile-edit">
-  <div class="popup__content">
-    <button type="button" class="popup__close"></button>
-    <h2 class="popup__title">Редактировать профиль</h2>
-    <form class="popup__form" name="popupForm" >
-      <input class="popup__input popup__input_type_user-name" type="text" name="userName" required placeholder="Как вас зовут?">
-      <input class="popup__input popup__input_type_user-status" type="text" name="userStatus" required placeholder="Чем вы занимаетесь?">
-      <button type="submit" class="popup__submit-button">Сохранить</button>
-    </form>
-  </div>
-</div>
-
-<div class="popup popup_type_add-photo">
-  <div class="popup__content">
-    <button type="button" class="popup__close"></button>
-    <h2 class="popup__title">Новое место</h2>
-    <form class="popup__form" name="popupFormPhotoCard" >
-      <input class="popup__input popup__input_type_place-name" type="text" name="placeName" required placeholder="Название">
-      <input class="popup__input popup__input_type_picture-url" type="text" name="pictureUrl" required placeholder="Ссылка на картинку">
-      <button type="submit" class="popup__submit-button">Сохранить</button>
-    </form>
-  </div>
-</div>
-
-<div class="popup popup_type_view-photo">
-  <div class="popup__view-photo">
-    <button type="button" class="popup__close"></button>
-  <img class="popup__image" src="#" alt="#">
-  <p class="popup__caption"></p>
-  </div>
-</div>
-
-<template id="photo-card-template">
-    <li class="photo-card">
-      <button aria-label="Удалить" type="button" class="photo-card__delete"></button>
-      <img class="photo-card__image" src="./images/elements/kilimanjaro.jpg" alt="Килиманджаро" role="button">
-      <div class="photo-card__title">
-        <h2 class="photo-card__text">Килиманджаро</h2>
-        <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+    <div class="popup popup_type_add-photo">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popupFormPhotoCard" >
+          <input class="popup__input popup__input_type_place-name" type="text" name="placeName" required placeholder="Название">
+          <input class="popup__input popup__input_type_picture-url" type="url" name="pictureUrl" required placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__submit-button">Сохранить</button>
+        </form>
       </div>
-    </li>
-</template>
+    </div>
+
+    <div class="popup popup_type_view-photo">
+      <div class="popup__view-photo">
+        <button type="button" class="popup__close"></button>
+      <img class="popup__image" src="#" alt="#">
+      <p class="popup__caption"></p>
+      </div>
+    </div>
+
+    <template id="photo-card-template">
+        <li class="photo-card">
+          <button aria-label="Удалить" type="button" class="photo-card__delete"></button>
+          <img class="photo-card__image" src="#" alt="#" role="button">
+          <div class="photo-card__title">
+            <h2 class="photo-card__text">Килиманджаро</h2>
+            <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+          </div>
+        </li>
+    </template>
 </body>
 </html>
