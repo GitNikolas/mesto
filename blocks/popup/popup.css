@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: center;
   visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, .9);
+  opacity: 0;
+  transition: .2s linear;
 }
 

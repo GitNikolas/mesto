@@ -1,7 +1,8 @@
-.elements__title-text{
+.photo-card__text{
   grid-area: element__title-text;
   color: #000000;
   margin: 0 auto 0 21px;
+  padding: 25px 0 25px;
   max-width: 195px;
   white-space: nowrap;
   text-overflow: ellipsis;

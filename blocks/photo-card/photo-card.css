@@ -1,4 +1,4 @@
-.elements__item{
+.photo-card{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
@@ -6,4 +6,5 @@
   'element__title';
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
