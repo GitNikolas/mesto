@@ -18,6 +18,8 @@
 
 .popup__submit-button:disabled{
   background-color: rgba(0, 0, 0, 0.4);
+  cursor: default;
+
 }
 
 @media screen and (max-width:425px) {

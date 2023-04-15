@@ -18,25 +18,6 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_open');
 };
 
-
-// Заменить hasInvalidInputs на новую проверку
-//
-//
-//
-
-// const togglePopupSubmitButtonState = (popupForm) => {
-//   const inputs = popupForm.querySelectorAll('.popup__input');
-//   const submitButtons = popupForm.querySelector('.popup__submit-button');
-
-//   const hasInvalidInputs = Array.from(inputs).some(item => item.value.length === 0);
-
-//   if (hasInvalidInputs){
-//     submitButtons.setAttribute('disabled', true);
-//   } else {
-//     submitButtons.removeAttribute('disabled');
-//   }
-// };
-
 function submitProfileForm(event){
   event.preventDefault();
   userName.textContent = popupUserName.value;
@@ -48,12 +29,7 @@ editLink.addEventListener('click', () => {
   openPopup(profileEditPopup);
   popupUserName.value = userName.textContent ;
   popupUserStatus.value = userStatus.textContent;
-  // togglePopupSubmitButtonState(profileEditPopup);
 });
-
-profileEditPopup.addEventListener('input', () =>{
-  // togglePopupSubmitButtonState(profileEditPopup);
-})
 
 profileEditPopupCloseButton.addEventListener('click', () => {
   closePopup(profileEditPopup);
@@ -142,7 +118,6 @@ submitPhotoPopup = (event) => {
 };
 
 addButton.addEventListener('click', () => {
-  // togglePopupSubmitButtonState(addPhotoPopup);
   openPopup(addPhotoPopup);
 })
 
@@ -152,11 +127,26 @@ closeaddPhotoPopupButton.addEventListener('click', ()=>{
 
 addPhotoPopupForm.addEventListener('submit', submitPhotoPopup);
 
-addPhotoPopup.addEventListener('input', () => {
-  // togglePopupSubmitButtonState(addPhotoPopup)
-});
-
 // Реализация валидации
+
+function disabledButton(button) {
+  button.setAttribute('disabled', true);
+};
+
+function enabledButton(button) {
+  button.removeAttribute('disabled');
+};
+
+function toggleButtonValidity(popupForm) {
+  popupForm.forEach((form) => {
+    const submitButton = form.querySelector('.popup__submit-button');
+    if(form.checkValidity()){
+      enabledButton(submitButton);
+    } else {
+      disabledButton(submitButton);
+    }
+  });
+}
 
 function setInputValidState(input, errorMessage) {
   input.classList.remove('popup__input_invalid');
@@ -194,7 +184,8 @@ function enableValidation () {
 
   inputsArray.forEach((input) => {
     input.addEventListener('input', () => {
-      checkInputValidity(input)
+      checkInputValidity(input);
+      toggleButtonValidity(popupForm);
     });
   });
 };
