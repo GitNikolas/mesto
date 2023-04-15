@@ -18,18 +18,24 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_open');
 };
 
-const togglePopupSubmitButtonState = (popupForm) => {
-  const inputs = popupForm.querySelectorAll('.popup__input');
-  const submitButtons = popupForm.querySelector('.popup__submit-button');
 
-  const hasInvalidInputs = Array.from(inputs).some(item => item.value.length === 0);
+// Заменить hasInvalidInputs на новую проверку
+//
+//
+//
 
-  if (hasInvalidInputs){
-    submitButtons.setAttribute('disabled', true);
-  } else {
-    submitButtons.removeAttribute('disabled');
-  }
-};
+// const togglePopupSubmitButtonState = (popupForm) => {
+//   const inputs = popupForm.querySelectorAll('.popup__input');
+//   const submitButtons = popupForm.querySelector('.popup__submit-button');
+
+//   const hasInvalidInputs = Array.from(inputs).some(item => item.value.length === 0);
+
+//   if (hasInvalidInputs){
+//     submitButtons.setAttribute('disabled', true);
+//   } else {
+//     submitButtons.removeAttribute('disabled');
+//   }
+// };
 
 function submitProfileForm(event){
   event.preventDefault();
@@ -42,11 +48,11 @@ editLink.addEventListener('click', () => {
   openPopup(profileEditPopup);
   popupUserName.value = userName.textContent ;
   popupUserStatus.value = userStatus.textContent;
-  togglePopupSubmitButtonState(profileEditPopup);
+  // togglePopupSubmitButtonState(profileEditPopup);
 });
 
 profileEditPopup.addEventListener('input', () =>{
-  togglePopupSubmitButtonState(profileEditPopup);
+  // togglePopupSubmitButtonState(profileEditPopup);
 })
 
 profileEditPopupCloseButton.addEventListener('click', () => {
@@ -136,7 +142,7 @@ submitPhotoPopup = (event) => {
 };
 
 addButton.addEventListener('click', () => {
-  togglePopupSubmitButtonState(addPhotoPopup);
+  // togglePopupSubmitButtonState(addPhotoPopup);
   openPopup(addPhotoPopup);
 })
 
@@ -147,5 +153,52 @@ closeaddPhotoPopupButton.addEventListener('click', ()=>{
 addPhotoPopupForm.addEventListener('submit', submitPhotoPopup);
 
 addPhotoPopup.addEventListener('input', () => {
-  togglePopupSubmitButtonState(addPhotoPopup)
+  // togglePopupSubmitButtonState(addPhotoPopup)
 });
+
+// Реализация валидации
+
+function setInputValidState(input, errorMessage) {
+  input.classList.remove('popup__input_invalid');
+  errorMessage.textContent = '';
+};
+
+function setInputInvalidState(input, errorMessage) {
+  input.classList.add('popup__input_invalid');
+  errorMessage.textContent = input.validationMessage;
+};
+
+function checkInputValidity(input) {
+  const errorMessage = document.querySelector(`#error-${input.id}`);
+
+  if(input.checkValidity()) {
+    setInputValidState(input, errorMessage);
+  } else {
+    setInputInvalidState(input, errorMessage);
+  }
+
+
+};
+
+function enableValidation () {
+  const popupForm = document.querySelectorAll('.popup__form');
+
+  popupForm.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+    });
+  });
+
+  const inputs = document.querySelectorAll('.popup__input');
+  const inputsArray = Array.from(inputs);
+
+  inputsArray.forEach((input) => {
+    input.addEventListener('input', () => {
+      checkInputValidity(input)
+    });
+  });
+};
+
+enableValidation ()
+
+

@@ -1,0 +1,6 @@
+.popup__error-message{
+  color:red;
+  font-size:.8em;
+  transition: .3s;
+  padding:10px;
+}
