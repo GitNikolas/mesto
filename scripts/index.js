@@ -29,6 +29,7 @@ editLink.addEventListener('click', () => {
   openPopup(profileEditPopup);
   popupUserName.value = userName.textContent ;
   popupUserStatus.value = userStatus.textContent;
+  enableValidation (profileEditPopup);
 });
 
 profileEditPopupCloseButton.addEventListener('click', () => {
@@ -119,6 +120,7 @@ submitPhotoPopup = (event) => {
 
 addButton.addEventListener('click', () => {
   openPopup(addPhotoPopup);
+  enableValidation (addPhotoPopup);
 })
 
 closeaddPhotoPopupButton.addEventListener('click', ()=>{
@@ -138,14 +140,13 @@ function enabledButton(button) {
 };
 
 function toggleButtonValidity(popupForm) {
-  popupForm.forEach((form) => {
-    const submitButton = form.querySelector('.popup__submit-button');
-    if(form.checkValidity()){
+
+    const submitButton = popupForm.querySelector('.popup__submit-button');
+    if(popupForm.checkValidity()){
       enabledButton(submitButton);
     } else {
       disabledButton(submitButton);
     }
-  });
 }
 
 function setInputValidState(input, errorMessage) {
@@ -166,20 +167,20 @@ function checkInputValidity(input) {
   } else {
     setInputInvalidState(input, errorMessage);
   }
-
-
 };
 
-function enableValidation () {
-  const popupForm = document.querySelectorAll('.popup__form');
+function enableValidation (popup) {
+  const popupForm = popup.querySelector('.popup__form');
 
-  popupForm.forEach((form) => {
-    form.addEventListener('submit', (event) => {
+  popupForm.addEventListener('submit', (event) => {
       event.preventDefault()
+      popupForm.reset();
+      toggleButtonValidity(popupForm);
     });
-  });
 
-  const inputs = document.querySelectorAll('.popup__input');
+  toggleButtonValidity(popupForm);
+
+  const inputs = popup.querySelectorAll('.popup__input');
   const inputsArray = Array.from(inputs);
 
   inputsArray.forEach((input) => {
@@ -190,6 +191,26 @@ function enableValidation () {
   });
 };
 
-enableValidation ()
+// Реализация закрытия на overlay и escape
+
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach((popup) => {
+  const popupOverlay = popup.querySelector('.popup__overlay');
+
+  popupOverlay.addEventListener('click', (event) =>{
+    const eventArray = event.composedPath();
+
+    if(eventArray[0] === popupOverlay){
+      closePopup(popup);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if(event.code === 'Escape') {
+      closePopup(popup);
+    };
+  });
+});
 
 

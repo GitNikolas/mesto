@@ -38,38 +38,45 @@
     </footer>
 
     <div class="popup popup_type_profile-edit">
-      <div class="popup__content">
-        <button type="button" class="popup__close"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popupForm" novalidate>
-          <input id="userName" class="popup__input popup__input_type_user-name" autocomplete="off" type="text" minlength="2" maxlength="40" name="userName" required placeholder="Как вас зовут?">
-          <span id="error-userName" class="popup__error-message"></span>
-          <input id="userStatus" class="popup__input popup__input_type_user-status" autocomplete="off" type="text" minlength="2" maxlength="200" name="userStatus" required placeholder="Чем вы занимаетесь?">
-          <span id="error-userStatus" class="popup__error-message"></span>
-          <button type="submit" class="popup__submit-button">Сохранить</button>
-        </form>
+      <div class="popup__overlay">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="popupForm" novalidate>
+            <input id="userName" class="popup__input popup__input_type_user-name" autocomplete="off" type="text" minlength="2" maxlength="40" name="userName" required placeholder="Как вас зовут?">
+            <span id="error-userName" class="popup__error-message"></span>
+            <input id="userStatus" class="popup__input popup__input_type_user-status" autocomplete="off" type="text" minlength="2" maxlength="200" name="userStatus" required placeholder="Чем вы занимаетесь?">
+            <span id="error-userStatus" class="popup__error-message"></span>
+            <button type="submit" class="popup__submit-button">Сохранить</button>
+          </form>
+        </div>
       </div>
     </div>
 
     <div class="popup popup_type_add-photo">
-      <div class="popup__content">
-        <button type="button" class="popup__close"></button>
-        <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popupFormPhotoCard" novalidate>
-          <input id="placeName" class="popup__input popup__input_type_place-name" autocomplete="off" type="text" name="placeName" required placeholder="Название">
-          <span id="error-placeName" class="popup__error-message"></span>
-          <input id="pictureUrl" class="popup__input popup__input_type_picture-url" autocomplete="off" type="url" name="pictureUrl" required placeholder="Ссылка на картинку">
-          <span id="error-pictureUrl" class="popup__error-message"></span>
-          <button type="submit" class="popup__submit-button">Сохранить</button>
-        </form>
+      <div class="popup__overlay">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form class="popup__form" name="popupFormPhotoCard" novalidate>
+            <input id="placeName" class="popup__input popup__input_type_place-name" autocomplete="off" type="text" minlength="2" maxlength="30" name="placeName" required placeholder="Название">
+            <span id="error-placeName" class="popup__error-message"></span>
+            <input id="pictureUrl" class="popup__input popup__input_type_picture-url" autocomplete="off" type="url" name="pictureUrl" required placeholder="Ссылка на картинку">
+            <span id="error-pictureUrl" class="popup__error-message"></span>
+            <button type="submit" class="popup__submit-button">Создать</button>
+          </form>
+        </div>
       </div>
+
     </div>
 
     <div class="popup popup_type_view-photo">
-      <div class="popup__view-photo">
-        <button type="button" class="popup__close"></button>
-      <img class="popup__image" src="#" alt="#">
-      <p class="popup__caption"></p>
+      <div class="popup__overlay">
+        <div class="popup__view-photo">
+          <button type="button" class="popup__close"></button>
+        <img class="popup__image" src="#" alt="#">
+        <p class="popup__caption"></p>
+        </div>
       </div>
     </div>
 
