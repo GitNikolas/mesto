@@ -8,14 +8,16 @@ const profileEditPopupForm = profileEditPopup.querySelector('.popup__form');
 const userName = document.querySelector('.profile__name');
 const userStatus = document.querySelector('.profile__status');
 const placeName = document.querySelector('.popup__input_type_place-name');
-const link = document.querySelector('.popup__input_type_picture-url')
+const link = document.querySelector('.popup__input_type_picture-url');
 
 const openPopup = (popup) => {
   popup.classList.add('popup_open');
+  document.addEventListener('keydown', closePopupKeydown);
 };
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
+  document.removeEventListener('keydown', closePopupKeydown);
 };
 
 function submitProfileForm(event){
@@ -29,7 +31,7 @@ editLink.addEventListener('click', () => {
   openPopup(profileEditPopup);
   popupUserName.value = userName.textContent ;
   popupUserStatus.value = userStatus.textContent;
-  enableValidation (profileEditPopup);
+  enableValidation(config);
 });
 
 profileEditPopupCloseButton.addEventListener('click', () => {
@@ -60,10 +62,11 @@ const createPhotoCard = (photoData) => {
     likeButton.classList.toggle('photo-card__like_active')
   };
 
+  const openedPhoto=document.querySelector('.popup__image');
+  const subtitlePhoto = document.querySelector('.popup__caption');
+
   photoImage.addEventListener('click', () => {
     openPopup(photoViewPopup);
-    const openedPhoto=photoViewPopup.querySelector('.popup__image')
-    const subtitlePhoto = photoViewPopup.querySelector('.popup__caption');
     openedPhoto.src=photoImage.src;
     subtitlePhoto.textContent=photoImage.alt;
   });
@@ -120,7 +123,6 @@ submitPhotoPopup = (event) => {
 
 addButton.addEventListener('click', () => {
   openPopup(addPhotoPopup);
-  enableValidation (addPhotoPopup);
 })
 
 closeaddPhotoPopupButton.addEventListener('click', ()=>{
@@ -129,88 +131,29 @@ closeaddPhotoPopupButton.addEventListener('click', ()=>{
 
 addPhotoPopupForm.addEventListener('submit', submitPhotoPopup);
 
-// Реализация валидации
-
-function disabledButton(button) {
-  button.setAttribute('disabled', true);
-};
-
-function enabledButton(button) {
-  button.removeAttribute('disabled');
-};
-
-function toggleButtonValidity(popupForm) {
-
-    const submitButton = popupForm.querySelector('.popup__submit-button');
-    if(popupForm.checkValidity()){
-      enabledButton(submitButton);
-    } else {
-      disabledButton(submitButton);
-    }
-}
-
-function setInputValidState(input, errorMessage) {
-  input.classList.remove('popup__input_invalid');
-  errorMessage.textContent = '';
-};
-
-function setInputInvalidState(input, errorMessage) {
-  input.classList.add('popup__input_invalid');
-  errorMessage.textContent = input.validationMessage;
-};
-
-function checkInputValidity(input) {
-  const errorMessage = document.querySelector(`#error-${input.id}`);
-
-  if(input.checkValidity()) {
-    setInputValidState(input, errorMessage);
-  } else {
-    setInputInvalidState(input, errorMessage);
-  }
-};
-
-function enableValidation (popup) {
-  const popupForm = popup.querySelector('.popup__form');
-
-  popupForm.addEventListener('submit', (event) => {
-      event.preventDefault()
-      popupForm.reset();
-      toggleButtonValidity(popupForm);
-    });
-
-  toggleButtonValidity(popupForm);
-
-  const inputs = popup.querySelectorAll('.popup__input');
-  const inputsArray = Array.from(inputs);
-
-  inputsArray.forEach((input) => {
-    input.addEventListener('input', () => {
-      checkInputValidity(input);
-      toggleButtonValidity(popupForm);
-    });
-  });
-};
-
 // Реализация закрытия на overlay и escape
 
 const popups = document.querySelectorAll('.popup');
 
-popups.forEach((popup) => {
-  const popupOverlay = popup.querySelector('.popup__overlay');
+const closeByOverlay = () => {
+  popups.forEach((popup) => {
+    const popupOverlay = popup.querySelector('.popup__overlay');
 
-  popupOverlay.addEventListener('click', (event) =>{
-    const eventArray = event.composedPath();
-
-    if(eventArray[0] === popupOverlay){
-      closePopup(popup);
-    }
+    popupOverlay.addEventListener('click', (event) =>{
+      if(event.currentTarget === event.target){
+        closePopup(popup);
+      }
+    });
   });
+}
 
-  document.addEventListener('keydown', (event) => {
+closeByOverlay();
+
+const closePopupKeydown = (event) => {
+  popups.forEach((popup) => {
     if(event.code === 'Escape') {
       closePopup(popup);
     };
-  });
-});
-
+  })
+};
 
