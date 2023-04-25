@@ -2,5 +2,5 @@
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.15);
   color: rgba(0, 0, 0, 0.15);
-  cursor: default;
+  pointer-events: none;
 }
