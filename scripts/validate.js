@@ -1,23 +1,31 @@
 // работа с инпутами
 
-export const setInputValidState = (input, errorElement, { inputErrorClass }) => {
+export const setInputValidState = (input, { inputErrorClass }) => {
+  const errorElement = document.querySelector(`#error-${input.id}`);
   input.classList.remove(inputErrorClass);
   errorElement.textContent = '';
 };
 
-const setInputInvalidState = (input, errorElement, { inputErrorClass }) => {
+const setInputInvalidState = (input, { inputErrorClass }) => {
+  const errorElement = document.querySelector(`#error-${input.id}`);
   input.classList.add(inputErrorClass);
   errorElement.textContent = input.validationMessage;
 };
 
-const checkInputValidity = (input, rest) => {
-  const errorElement = document.querySelector(`#error-${input.id}`);
+export const hideInputsError = (popup, { inputSelector, ...rest }) => {
+  const inputsArray = popup.querySelectorAll(inputSelector);
 
+  inputsArray.forEach((input) => {
+    setInputValidState(input, rest);
+  });
+};
+
+const checkInputValidity = (input, rest) => {
   if(input.checkValidity()){
-    setInputValidState(input, errorElement, rest);
+    setInputValidState(input, rest);
   }
   else {
-    setInputInvalidState(input, errorElement, rest);
+    setInputInvalidState(input, rest);
   }
 };
 
@@ -77,7 +85,7 @@ const enableValidation = ({ formSelector,  inputSelector, ...rest }) => {
 
     setSubmitListener(formElement, rest);
 
-    setInputListener(formElement, inputSelector, rest)
+    setInputListener(formElement, inputSelector, rest);
   });
 }
 
