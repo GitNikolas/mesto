@@ -1,8 +1,6 @@
 import { initialCards } from './initialCards.js';
-// import { config, toggleButtonState, hideInputsError } from './validate.js';
-import Card from './card.js';
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-
 
 const config = {
   formSelector: '.popup__form',
@@ -16,16 +14,6 @@ const config = {
 // карточки
 
 const photoGrid = document.querySelector('.elements__list');
-
-// const addPhotoCard = (photoData) => {
-//   photoData.forEach((item) => {
-//     const card = new Card (item, '#photo-card-template');
-//     const cardElement = card.generateCard();
-//     photoGrid.prepend(cardElement);
-//   });
-// }
-
-// addPhotoCard(initialCards);
 
 const addPhotoCard = (photoData, templateSelector) => {
   const card = new Card (photoData, templateSelector);
@@ -44,16 +32,6 @@ profileEditValidator.enableValidation();
 
 const addPhotoValidator = new FormValidator(config, '#popupFormAddPhoto');
 addPhotoValidator.enableValidation();
-
-
-
-
-
-
-
-
-
-
 
 const editLink = document.querySelector('.profile__edit-button');
 const profileEditPopup = document.querySelector('.popup_type_profile-edit');
@@ -94,61 +72,6 @@ profileEditPopupCloseButton.addEventListener('click', () => {
 });
 
 profileEditPopupForm.addEventListener('submit', submitProfileForm);
-
-// реализация создания новой карточки
-
-// const openedPhoto=document.querySelector('.popup__image');
-// const subtitlePhoto = document.querySelector('.popup__caption');
-// const photoCardTemplate = document.getElementById('photo-card-template');
-// const photoGrid = document.querySelector('.elements__list');
-// const photoViewPopup = document.querySelector('.popup_type_view-photo');
-// const photoViewPopupCloseButton = photoViewPopup.querySelector('.popup__close');
-
-// const createPhotoCard = (photoData) => {
-//   const photoElement = photoCardTemplate.content.querySelector('.photo-card').cloneNode(true);
-//   const photoName = photoElement.querySelector('.photo-card__text');
-//   const photoImage= photoElement.querySelector('.photo-card__image');
-//   const likeButton = photoElement.querySelector('.photo-card__like');
-//   const deleteButton = photoElement.querySelector('.photo-card__delete');
-
-//   const handleDelete = () => {
-//     photoElement.remove();
-//   };
-
-//   const handleLike = () => {
-//     likeButton.classList.toggle('photo-card__like_active');
-//   };
-
-//   photoImage.addEventListener('click', () => {
-//     openPopup(photoViewPopup);
-//     openedPhoto.src=photoImage.src;
-//     subtitlePhoto.textContent=photoImage.alt;
-//   });
-
-//   deleteButton.addEventListener('click', handleDelete);
-
-//   likeButton.addEventListener('click', handleLike);
-
-//   photoName.textContent = photoData.name;
-//   photoImage.src = photoData.link;
-//   photoImage.alt = photoData.name;
-
-//   return photoElement;
-// }
-
-// photoViewPopupCloseButton.addEventListener('click', () => {
-//   closePopup(photoViewPopup);
-// });
-
-// const renderPhotoElement = (photoElement) => {
-//   photoGrid.prepend(photoElement);
-// }
-
-// initialCards.forEach((initialCards) => {
-//   renderPhotoElement(createPhotoCard(initialCards));
-// });
-
-// реализация попапа добавления новой карточки
 
 const addPhotoPopup = document.querySelector('.popup_type_add-photo');
 const addButton = document.querySelector('.profile__add-button');
