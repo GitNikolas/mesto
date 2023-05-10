@@ -16,20 +16,21 @@ class Card {
     return templateElement;
   }
 
+  _getImageSelector = () => {
+    const image = this._element.querySelector('.photo-card__image');
+    return image;
+  }
+
   generateCard() {
     this._element = this._getTemplate();
+    this._image = this._getImageSelector();
     this._setEventListeners();
 
-    this._element.querySelector('.photo-card__image').src = this._link;
-    this._element.querySelector('.photo-card__image').alt = this._name;
+    this._image.src = this._link;
+    this._image.alt = this._name;
     this._element.querySelector('.photo-card__text').textContent = this._name;
 
     return this._element;
-  }
-
-  _handleSubmit(event) {
-    const data = Object.fromEntries(new FormData(event.target));
-    console.log(data)
   }
 
   _handleDelete = () => {
