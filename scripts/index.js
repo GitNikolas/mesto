@@ -2,6 +2,8 @@ import { initialCards } from './initialCards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
+// карточки
+
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -10,8 +12,6 @@ const config = {
   inputErrorClass: 'popup__input_invalid',
   errorMessageClass:'popup__error-message',
 }
-
-// карточки
 
 const photoGrid = document.querySelector('.elements__list');
 
@@ -32,6 +32,8 @@ profileEditValidator.enableValidation();
 
 const addPhotoValidator = new FormValidator(config, '#popupFormAddPhoto');
 addPhotoValidator.enableValidation();
+
+// попап редактирования профиля
 
 const editLink = document.querySelector('.profile__edit-button');
 const profileEditPopup = document.querySelector('.popup_type_profile-edit');
@@ -72,6 +74,8 @@ profileEditPopupCloseButton.addEventListener('click', () => {
 });
 
 profileEditPopupForm.addEventListener('submit', submitProfileForm);
+
+// попап добавления карточек
 
 const addPhotoPopup = document.querySelector('.popup_type_add-photo');
 const addButton = document.querySelector('.profile__add-button');
