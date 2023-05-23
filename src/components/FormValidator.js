@@ -1,5 +1,4 @@
 class FormValidator {
-
   constructor(config, formElement){
     this.formSelector = config.formSelector;
     this.inputSelector = config.inputSelector;
@@ -62,7 +61,6 @@ class FormValidator {
   }
 
   _setEventListeners() {
-
     this.formElement.addEventListener('submit', (event) => {
       event.preventDefault();
 
@@ -77,17 +75,12 @@ class FormValidator {
         this.toggleButtonState();
       });
     })
-
-
-
-
   }
 
   enableValidation(){
     this._setEventListeners();
 
   }
-
 }
 
 export default FormValidator;
