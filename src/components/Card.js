@@ -49,7 +49,7 @@ class Card {
 
     this._element.querySelector('.photo-card__image').addEventListener('click', this._handleCardClick);
 
-    this._element.querySelector('.photo-card__image').addEventListener('click', this._closePopup);
+
   }
 }
 
