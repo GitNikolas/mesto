@@ -14,6 +14,8 @@ import {
   userName,
   userStatus,
   initialCards,
+  userNameInput,
+  userStatusInput,
 } from '../utils/constants.js';
 
 //валидация
@@ -38,28 +40,35 @@ const popupWithImage = new PopupWithImage('.popup_type_view-photo');
 popupWithImage.setEventListeners();
 
 //классы форм
-const popupAddPhoto = new PopupWithForm('.popup_type_add-photo', renderCard);
+const popupAddPhoto = new PopupWithForm('.popup_type_add-photo', (data) => {
+  renderCard(data);
+  popupAddPhoto.closePopup();
+});
 popupAddPhoto.setEventListeners();
-popupAddPhoto.addPhotoCardFormSubmit();
 
-const popupProfileEdit = new PopupWithForm('.popup_type_profile-edit',  () => {
-  userInfo.setUserInfo();
+const popupProfileEdit = new PopupWithForm('.popup_type_profile-edit',  (data) => {
+  userInfo.setUserInfo(data);
   popupProfileEdit.closePopup();
 });
 popupProfileEdit.setEventListeners();
-popupProfileEdit.profileEditFormSubmit();
 
 //информация о пользователе
 const userInfo = new UserInfo({userName:userName , userStatus: userStatus});
 
 //установка слушателей для кнопок
 profileEditLink.addEventListener('click', () => {
-  popupProfileEdit.openPopup();
-  userInfo.getUserInfo();
+  const currentUserInfo = userInfo.getUserInfo();
+  userNameInput.value = currentUserInfo.userName;
+  userStatusInput.value = currentUserInfo.userStatus;
   profileEditValidator.toggleButtonState();
   profileEditValidator.hideInputsError();
+  popupProfileEdit.openPopup();
 });
 
-addPhotoCardtLink.addEventListener('click', () => {popupAddPhoto.openPopup()});
+addPhotoCardtLink.addEventListener('click', () => {
+  popupAddPhoto.openPopup();
+  addPhotoValidator.toggleButtonState();
+  addPhotoValidator.hideInputsError();
+});
 
 

@@ -42,5 +42,9 @@ export const addPhotoCardtLink = document.querySelector('.profile__add-button');
 export const userName = document.querySelector('.profile__name');
 export const userStatus = document.querySelector('.profile__status');
 
+export const userNameInput = document.querySelector('#userName');
+export const userStatusInput = document.querySelector('#userStatus');
+
+
 
 

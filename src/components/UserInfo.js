@@ -2,17 +2,23 @@ class UserInfo {
   constructor({ userName,userStatus }){
     this._userName = userName;
     this._userStatus = userStatus;
-    this._userNameInput = document.querySelector('#userName');
-    this._userStatusInput = document.querySelector('#userStatus');
   }
 
   getUserInfo(){
-    this._userNameInput.value = this._userName.textContent;
-    this._userStatusInput.value = this._userStatus.textContent;
+    const getUserInfo = {
+      userName: this._userName.textContent,
+      userStatus: this._userStatus.textContent,
+    }
+
+    return getUserInfo;
   }
-  setUserInfo(){
-    this._userName.textContent = this._userNameInput.value;
-    this._userStatus.textContent = this._userStatusInput.value;
+  setUserInfo(data){
+    const setUserInfo = {
+      userName: this._userName.textContent = data.userName,
+      userStatus: this._userStatus.textContent = data.userStatus,
+    }
+
+    return setUserInfo;
   }
 }
 

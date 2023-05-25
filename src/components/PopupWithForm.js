@@ -5,43 +5,28 @@ class PopupWithForm extends Popup{
     super(popupSelector);
     this.popupSelector = document.querySelector(popupSelector);
     this._renderer = renderer;
-
+    this._popupForm = this.popupSelector.querySelector('.popup__form');
   }
 
-  _getInputValues = () => {
-    const inputValues = {
-      name: this.popupSelector.querySelector('#placeName').value,
-      link: this.popupSelector.querySelector('#pictureUrl').value,
-    }
-
-    return inputValues;
+  _getInputValues() {
+    this._inputList = this._popupForm.querySelectorAll('.popup__input');
+    this._formValues = {};
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
+    return this._formValues;
   }
 
   closePopup(){
-    this._popupForm = this.popupSelector.querySelector('.popup__form');
     this._popupForm.reset();
     super.closePopup();
   }
 
-  addPhotoCardFormSubmit(){
-    this.popupSelector.querySelector('#popupFormAddPhoto').addEventListener('submit', (event) => {
-      event.preventDefault();
-      this._inputValues = this._getInputValues();
-
-      this._renderer(this._inputValues);
-      this.closePopup();
-    });
-  }
-
-  profileEditFormSubmit(){
-    this.popupSelector.querySelector('#popupFormEditProfile').addEventListener('submit', (event) => {
-      event.preventDefault();
-      this._renderer();
-    });
-  }
-
   setEventListeners(){
     super.setEventListeners();
+
+    this._popupForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this._renderer(this._getInputValues());
+    });
   }
 
 }
