@@ -3,9 +3,12 @@
   border: none;
   background-color: rgba(0,0,0,0);
   background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
   width: 22px;
   height: 19px;
-  margin: 0 20px 0 auto;
+  margin: 22px auto 0;
+  align-self: center;
+  justify-self: center;
   cursor: pointer;
 }
 

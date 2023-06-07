@@ -22,7 +22,7 @@ class Popup {
   }
 
   setEventListeners(){
-    this._popupSelector.addEventListener('click', (event) => {
+    this._popupSelector.addEventListener('mousedown', (event) => {
       if (event.target.classList.contains('popup__overlay') || event.target.classList.contains('popup__close')) {
           this.closePopup();
       }

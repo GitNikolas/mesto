@@ -20,8 +20,8 @@
       <section class="profile">
         <div class="profile__avatar"></div>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__status">Исследователь океана</p>
+          <h1 class="profile__name"></h1>
+          <p class="profile__status"></p>
           <button aria-label="Редактировать профиль" type="button" class="profile__edit-button"></button>
         </div>
         <button aria-label="Добавить фотокарточку" type="button" class="profile__add-button"></button>
@@ -78,6 +78,36 @@
       </div>
     </div>
 
+    <div class="popup popup_type_confirmation">
+      <div class="popup__overlay">
+        <div class="popup__content">
+          <div class="popup__confirmation">
+            <button type="button" class="popup__close"></button>
+            <h2 class="popup__title-confirmation">Вы уверены?</h2>
+            <form id="popupFormConfirmation" class="popup__form" name="popupFormConfirmation" novalidate>
+              <button type="submit" class="popup__submit-button">Да</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup popup_type_avatar-update">
+      <div class="popup__overlay">
+        <div class="popup__content">
+          <div class="popup__avatar-update">
+            <button type="button" class="popup__close"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form id="popupFormChangeAvatar" class="popup__form" name="popupFormChangeAvatar" novalidate>
+              <input id="avatarUrl" class="popup__input popup__input_type_avatar-Url" autocomplete="off" type="url" name="avatar" required placeholder="Ссылка на картинку">
+              <span id="error-avatarUrl" class="popup__error-message"></span>
+              <button type="submit" class="popup__submit-button">Сохранить</button>
+            </form>
+           </div>
+        </div>
+      </div>
+    </div>
+
     <template id="photo-card-template">
         <li class="photo-card">
           <button aria-label="Удалить" type="button" class="photo-card__delete"></button>
@@ -85,6 +115,7 @@
           <div class="photo-card__title">
             <h2 class="photo-card__text"></h2>
             <button aria-label="Мне нравится" type="button" class="photo-card__like"></button>
+            <p class="photo-card__like-counter"></p>
           </div>
         </li>
     </template>
