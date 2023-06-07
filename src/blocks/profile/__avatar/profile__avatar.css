@@ -8,7 +8,7 @@
 }
 
 .profile__avatar:hover:before {
-  content:url(../../../images/pencil_large.svg) ;
+  content:url(../../../images/pencil_large.svg);
   position: relative;
   left: 40%;
   top: 40%;
