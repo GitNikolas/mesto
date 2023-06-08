@@ -19,6 +19,9 @@ export const userStatus = document.querySelector('.profile__status');
 export const userNameInput = document.querySelector('#userName');
 export const userStatusInput = document.querySelector('#userStatus');
 
+export const userId = 'eb3c1336e2d967b4142f3312'
+
+
 
 
 

@@ -20,9 +20,6 @@ class Api {
       headers: this._headers,
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 
   getUserInformation() {
@@ -32,9 +29,6 @@ class Api {
       }
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 
   setInitialCard(data) {
@@ -47,9 +41,6 @@ class Api {
       })
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 
   setUserInformation(data) {
@@ -63,9 +54,7 @@ class Api {
       })
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
+
   }
 
   setUserAvatar(data) {
@@ -77,9 +66,6 @@ class Api {
       })
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 
   handleLike(cardId) {
@@ -90,9 +76,6 @@ class Api {
       }
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 
   deleteLike(cardId) {
@@ -103,9 +86,6 @@ class Api {
       }
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 
   deleteCard(cardId){
@@ -116,9 +96,6 @@ class Api {
       },
     })
     .then(this._handleResponse)
-    .catch((err) => {
-      console.error(err)
-    })
   }
 }
 

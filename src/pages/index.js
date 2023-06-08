@@ -14,9 +14,8 @@ import {
   addPhotoCardtLink,
   userName,
   userStatus,
-  userNameInput,
-  userStatusInput,
   profileAvatar,
+  userId,
 } from '../utils/constants.js';
 
 //валидация
@@ -38,9 +37,15 @@ function renderCard(cardData) {
       if(likeElement.classList.contains('photo-card__like_active')){
         api.deleteLike(cardId)
         .then( res => createCard.handleLike(res.likes.length) )
+        .catch((err) => {
+          console.error(err)
+        })
       } else {
         api.handleLike(cardId)
         .then( res => createCard.handleLike(res.likes.length) )
+        .catch((err) => {
+          console.error(err)
+        })
       }
     },
     handleDeleteClick: ({ card, cardId }) => {
@@ -64,6 +69,9 @@ const popupDeleteCard = new PopupDeleteCard('.popup_type_confirmation' , ({ card
   .then( () => {
     card.handleDelete();
   })
+  .catch((err) => {
+    console.error(err)
+  })
   .finally(() => popupDeleteCard.setDefaultText())
 
 })
@@ -72,34 +80,46 @@ popupDeleteCard.setEventListeners();
 //классы форм
 const popupAddPhoto = new PopupWithForm('.popup_type_add-photo', (data) => {
 
-    Promise.all([api.getUserInformation(data), api.setInitialCard(data)])
-    .then( ([dataUser, dataCard]) => {
-    dataCard.myId = dataUser._id;
+    api.setInitialCard(data)
+    .then((dataCard) => {
+    dataCard.myId = userId;
     section.addItemPrepend(renderCard(dataCard));
+    popupAddPhoto.closePopup();
     })
-    .finally( () => popupAddPhoto.setDefaultText())
-
-  popupAddPhoto.closePopup();
+    .catch((err) => {
+      console.error(err)
+    })
+    .finally(() => popupAddPhoto.setDefaultText())
 });
 
 popupAddPhoto.setEventListeners();
 
 const popupProfileEdit = new PopupWithForm('.popup_type_profile-edit',  (data) => {
   api.setUserInformation(data)
-  .then( res => userInfo.setUserInfo({userName: res.name, userStatus: res.about, avatar: res.avatar}))
+  .then( res => {
+    userInfo.setUserInfo({userName: res.name, userStatus: res.about, avatar: res.avatar});
+    popupProfileEdit.closePopup();
+  })
+  .catch((err) => {
+    console.error(err)
+  })
   .finally( () => popupProfileEdit.setDefaultText())
 
-  popupProfileEdit.closePopup();
 });
 popupProfileEdit.setEventListeners();
 
 const popupAvatarChange = new PopupWithForm('.popup_type_avatar-update', (data) => {
 
   api.setUserAvatar(data)
-  .then(res => userInfo.setUserInfo({userName: res.name, userStatus: res.about, avatar: res.avatar}))
+  .then(res => {
+  userInfo.setUserInfo({userName: res.name, userStatus: res.about, avatar: res.avatar})
+  popupAvatarChange.closePopup();
+  })
+  .catch((err) => {
+    console.error(err)
+  })
   .finally( () => popupAvatarChange.setDefaultText())
 
-  popupAvatarChange.closePopup();
 });
 popupAvatarChange.setEventListeners();
 
@@ -109,23 +129,22 @@ const userInfo = new UserInfo({userName:userName , userStatus: userStatus, avata
 //установка слушателей для кнопок
 profileEditLink.addEventListener('click', () => {
   const currentUserInfo = userInfo.getUserInfo();
-  userNameInput.value = currentUserInfo.userName;
-  userStatusInput.value = currentUserInfo.userStatus;
+  popupProfileEdit.setInputValues(currentUserInfo);
   profileEditValidator.toggleButtonState();
   profileEditValidator.hideInputsError();
   popupProfileEdit.openPopup();
 });
 
 addPhotoCardtLink.addEventListener('click', () => {
-  popupAddPhoto.openPopup();
   addPhotoValidator.toggleButtonState();
   addPhotoValidator.hideInputsError();
+  popupAddPhoto.openPopup();
 });
 
 profileAvatar.addEventListener('click', () => {
-  popupAvatarChange.openPopup();
   changeAvatarValidator.toggleButtonState();
   changeAvatarValidator.hideInputsError();
+  popupAvatarChange.openPopup();
 });
 
 // Работа с Api
@@ -139,11 +158,13 @@ const api = new Api({
 
 Promise.all([ api.getInitialCards(), api.getUserInformation()])
   .then(([dataCards, dataUser]) => {
-
     dataCards.forEach(item => item.myId = dataUser._id)
     userInfo.setUserInfo({ userName:dataUser.name, userStatus:dataUser.about, avatar:dataUser.avatar })
     dataCards.forEach((item) => {
-      renderCard(item)
       section.addItemAppend(renderCard(item))
     })
   })
+  .catch((err) => {
+    console.error(err)
+  })
+

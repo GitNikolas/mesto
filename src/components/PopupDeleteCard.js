@@ -1,12 +1,12 @@
 import Popup from './Popup.js';
 
 class PopupDeleteCard extends Popup {
-  constructor(popupSelector, renderer){
+  constructor(popupSelector, submitCallback){
     super(popupSelector);
     this._popupSelector = document.querySelector(popupSelector);
     this._form = this._popupSelector.querySelector('#popupFormConfirmation')
     this._closeButton = this._popupSelector.querySelector('.popup__close')
-    this._renderer = renderer;
+    this._submitCallback = submitCallback;
     this._submitButton = this._popupSelector.querySelector('.popup__submit-button');
     this._defaultSubmitButton = this._submitButton.textContent;
   }
@@ -28,7 +28,7 @@ class PopupDeleteCard extends Popup {
       event.preventDefault();
 
       this._submitButton.textContent = `${this._submitButton.textContent}...`
-      this._renderer({ card: this._card, cardId: this._cardId });
+      this._submitCallback({ card: this._card, cardId: this._cardId });
       this.closePopup();
     });
 
