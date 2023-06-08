@@ -1,5 +1,5 @@
 class Card {
-  constructor({ photoData,handleCardClick, handleLikeClick, handleDeleteClick }, templateSelector) {
+  constructor({ photoData, handleCardClick, handleLikeClick, handleDeleteClick }, templateSelector) {
     this._name = photoData.name;
     this._link = photoData.link;
     this._myId = photoData.myId;
