@@ -15,8 +15,28 @@ import {
   userName,
   userStatus,
   profileAvatar,
-  userId,
 } from '../utils/constants.js';
+
+// Работа с Api
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-68',
+  headers: {
+    authorization: '0df34ace-d52b-4f1d-b3b4-2e595c2517c9',
+    'Content-Type': 'application/json'
+  },
+});
+
+Promise.all([ api.getInitialCards(), api.getUserInformation()])
+  .then(([dataCards, dataUser]) => {
+
+    userInfo.setUserInfo({ userName:dataUser.name, userStatus:dataUser.about, avatar:dataUser.avatar, userId:dataUser._id});
+    dataCards.forEach((item) => {
+      section.addItemAppend(renderCard(item))
+    })
+  })
+  .catch((err) => {
+    console.error(err)
+  })
 
 //валидация
 const profileEditValidator = new FormValidator(config, '#popupFormEditProfile');
@@ -32,6 +52,7 @@ changeAvatarValidator.enableValidation();
 function renderCard(cardData) {
   const createCard = new Card({
     photoData:cardData,
+    myId: userInfo.userId,
     handleCardClick: (cardData) => {popupWithImage.openPopup(cardData)},
     handleLikeClick: (likeElement, cardId) => {
       if(likeElement.classList.contains('photo-card__like_active')){
@@ -52,7 +73,6 @@ function renderCard(cardData) {
       popupDeleteCard.openPopup({ card,cardId });
     }
   }, '#photo-card-template');
-
   return createCard.generateCard();
 }
 
@@ -82,7 +102,6 @@ const popupAddPhoto = new PopupWithForm('.popup_type_add-photo', (data) => {
 
     api.setInitialCard(data)
     .then((dataCard) => {
-    dataCard.myId = userId;
     section.addItemPrepend(renderCard(dataCard));
     popupAddPhoto.closePopup();
     })
@@ -112,7 +131,7 @@ const popupAvatarChange = new PopupWithForm('.popup_type_avatar-update', (data) 
 
   api.setUserAvatar(data)
   .then(res => {
-  userInfo.setUserInfo({userName: res.name, userStatus: res.about, avatar: res.avatar})
+  userInfo.setUserInfo({userName: res.name, userStatus: res.about, avatar: res.avatar});
   popupAvatarChange.closePopup();
   })
   .catch((err) => {
@@ -124,7 +143,7 @@ const popupAvatarChange = new PopupWithForm('.popup_type_avatar-update', (data) 
 popupAvatarChange.setEventListeners();
 
 //информация о пользователе
-const userInfo = new UserInfo({userName:userName , userStatus: userStatus, avatar: profileAvatar });
+const userInfo = new UserInfo({userName:userName , userStatus: userStatus, avatar: profileAvatar});
 
 //установка слушателей для кнопок
 profileEditLink.addEventListener('click', () => {
@@ -146,25 +165,3 @@ profileAvatar.addEventListener('click', () => {
   changeAvatarValidator.hideInputsError();
   popupAvatarChange.openPopup();
 });
-
-// Работа с Api
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-68',
-  headers: {
-    authorization: '0df34ace-d52b-4f1d-b3b4-2e595c2517c9',
-    'Content-Type': 'application/json'
-  },
-});
-
-Promise.all([ api.getInitialCards(), api.getUserInformation()])
-  .then(([dataCards, dataUser]) => {
-    dataCards.forEach(item => item.myId = dataUser._id)
-    userInfo.setUserInfo({ userName:dataUser.name, userStatus:dataUser.about, avatar:dataUser.avatar })
-    dataCards.forEach((item) => {
-      section.addItemAppend(renderCard(item))
-    })
-  })
-  .catch((err) => {
-    console.error(err)
-  })
-
