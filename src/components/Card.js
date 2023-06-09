@@ -1,8 +1,8 @@
 class Card {
-  constructor({ photoData, handleCardClick, handleLikeClick, handleDeleteClick }, templateSelector) {
+  constructor({ photoData, myId, handleCardClick, handleLikeClick, handleDeleteClick }, templateSelector) {
     this._name = photoData.name;
     this._link = photoData.link;
-    this._myId = photoData.myId;
+    this._myId = myId;
     this._cardId = photoData._id;
     this._likes = photoData.likes;
     this._likesLength = photoData.likes.length;
@@ -26,12 +26,14 @@ class Card {
 
   generateCard() {
     this._setEventListeners();
-    this._visibleDeleteIcon();
-    this._checkLikeStatus();
 
     this._image.src = this._link;
     this._image.alt = this._name;
     this._counter.textContent = this._likesLength;
+    this._element.myId = this._myId;
+
+    this._visibleDeleteIcon();
+    this._checkLikeStatus();
 
     this._element.querySelector('.photo-card__text').textContent = this._name;
     return this._element;
